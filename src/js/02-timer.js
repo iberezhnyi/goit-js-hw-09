@@ -63,21 +63,16 @@ class Timer {
   }
 
   convertMs(ms) {
-    // Number of milliseconds per unit of time
     const second = 1000;
     const minute = second * 60;
     const hour = minute * 60;
     const day = hour * 24;
 
-    // Remaining days
     const days = this.addLeadingZero(Math.floor(ms / day));
-    // Remaining hours
     const hours = this.addLeadingZero(Math.floor((ms % day) / hour));
-    // Remaining minutes
     const minutes = this.addLeadingZero(
       Math.floor(((ms % day) % hour) / minute)
     );
-    // Remaining seconds
     const seconds = this.addLeadingZero(
       Math.floor((((ms % day) % hour) % minute) / second)
     );
@@ -104,3 +99,84 @@ function updateTimerFace({ days, hours, minutes, seconds }) {
 const timer = new Timer({ onTick: updateTimerFace });
 
 refs.btnStartEl.addEventListener('click', timer.start.bind(timer));
+
+// ======================================================================================
+
+// import flatpickr from 'flatpickr';
+// import 'flatpickr/dist/flatpickr.min.css';
+// import Notiflix from 'notiflix';
+
+// const refs = {
+//   startBtn: document.querySelector('button[data-start]'),
+//   input: document.querySelector('input[id="datetime-picker"]'),
+//   spanDays: document.querySelector('span[data-days]'),
+//   spanHours: document.querySelector('span[data-hours]'),
+//   spanMinutes: document.querySelector('span[data-minutes]'),
+//   spanSeconds: document.querySelector('span[data-seconds]'),
+// };
+
+// refs.startBtn.addEventListener('click', onStartClick);
+// refs.startBtn.disabled = true;
+// let userDate = null;
+
+// const options = {
+//   intervalID: null,
+//   enableTime: true,
+//   time_24hr: true,
+//   defaultDate: new Date(),
+//   minuteIncrement: 1,
+
+//   onClose(selectedDates) {
+//     userDate = selectedDates[0].getTime();
+
+//     if (Date.now() > userDate) {
+//       Notiflix.Notify.failure('Please choose a date in the future');
+//       return;
+//     }
+//     refs.startBtn.disabled = false;
+//   },
+// };
+
+// function onStartClick() {
+//   const intervalID = setInterval(() => {
+//     const currentTime = Date.now();
+//     const deltaTime = userDate - currentTime;
+//     updateTimerFace(deltaTime);
+
+//     console.log(deltaTime);
+//     if (deltaTime < 0) {
+//       clearInterval(intervalID);
+//       refs.startBtn.disabled = true;
+//       updateTimerFace(0);
+//     }
+//   }, 1000);
+// }
+
+// flatpickr(refs.input, options);
+
+// function updateTimerFace(deltaTime) {
+//   refs.spanDays.textContent = convertMs(deltaTime).days;
+//   refs.spanHours.textContent = convertMs(deltaTime).hours;
+//   refs.spanMinutes.textContent = convertMs(deltaTime).minutes;
+//   refs.spanSeconds.textContent = convertMs(deltaTime).seconds;
+// }
+
+// function convertMs(ms) {
+//   const second = 1000;
+//   const minute = second * 60;
+//   const hour = minute * 60;
+//   const day = hour * 24;
+
+//   const days = addLeadingZero(Math.floor(ms / day));
+//   const hours = addLeadingZero(Math.floor((ms % day) / hour));
+//   const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+//   const seconds = addLeadingZero(
+//     Math.floor((((ms % day) % hour) % minute) / second)
+//   );
+
+//   return { days, hours, minutes, seconds };
+// }
+
+// function addLeadingZero(value) {
+//   return String(value).padStart(2, '0');
+// }
