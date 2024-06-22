@@ -12,7 +12,7 @@ function onStartClick() {
 
   intervalId = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
-  }, 1000);
+  }, 100);
 }
 
 function onStopClick() {
